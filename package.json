@@ -1,0 +1,24 @@
+{
+  "name": "mi-inventario-electron",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron .",
+    "rebuild": "electron-rebuild -f -w better-sqlite3",
+    "build": "electron-packager . -w electron-rebuild",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^8.4.0",
+    "bootstrap": "^5.3.0"
+  },
+  "devDependencies": {
+    "electron": "^25.0.0",
+    "electron-packager": "^17.1.1",
+    "electron-rebuild": "^3.2.9"
+  }
+}

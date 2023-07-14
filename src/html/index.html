@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <title>Mi inventario</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center;">Mi inventario</h1>
+            <div class="col-md">
+                <div class="shadow p-3 mb-5 bg-body-tertiary rounded formulario">
+                    <!-- Formulario de ingreso -->
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                            <div id="emailHelp" class="form-text">No compartas tu contraseña con nadie.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="inputPassword">
+                        </div>
+                        <div class="" style="display: flex;justify-content: center;">
+                            <button id="btnIngresar" type="submit" class="btn btn-primary">Ingresar</button>
+                        </div>
+                    </form>
+                    <div id="alertValid" style="margin-top: 20px; display: grid" class="alert alert-danger" role="alert">
+                        <h3 style="text-align: center;">El usuario o contraseña son incorrectas</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="alert alert-danger position-absolute top-50" role="alert">
+            A simple danger alert—check it out!
+        </div> -->
+
+
+
+</body>
+<script type="module" src="../scripts/index.js"></script>
+<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+
+</html>

@@ -1,0 +1,47 @@
+body {
+    margin: 2em;
+    background-color: #262626;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+
+
+h1 {
+    color: white;
+}
+
+.formulario {
+    margin-top: 3em;
+    background-color: white;
+}
+
+
+
+#sideBar {
+    padding: 0;
+    margin-left: -25px;
+    margin-top: -25px;
+    height: 99vh;
+    min-width: 172px;
+}
+
+#sideBar div{
+    margin-bottom: 30px;
+}
+
+.bg-body-finanzas{
+    background-color: rgb(0, 117, 129);
+    border-radius: 10px;
+    padding: 5px;
+    margin-bottom: 20px;
+}
+.bg-body-finanzas h6{
+    color: white;
+}
+.bg-body-finanzas p{
+    color: white;
+}
+

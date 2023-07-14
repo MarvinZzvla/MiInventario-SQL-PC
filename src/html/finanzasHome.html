@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finanzas</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-12 p-3 m-3 bg-body-tertiary text-center shadow rounded">
+            <h2>Finanzas</h2>
+        </div>
+    </div>
+
+    <div class="bg-body-tertiary shadow rounded p-2 ">
+        <div class="row">
+            <div class="col-3">
+                <label for="datepicker">Fecha Inicio:</label>
+            </div>
+            <div class="col-3">
+                <label for="datepicker">Fecha Final:</label>
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-3">
+                <input type="date" id="dateStart" name="datepicker">
+            </div>
+            <div class="col-3">
+                <input type="date" id="dateEnd" name="datepicker">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary" id="submitBtn" >Buscar</button>
+            </div>
+    
+        </div>
+    </div>
+
+    <div id="finanzasRoot"></div>
+
+   
+
+    <!--
+
+    <div class="bg-body-tertiary rounded shadow p-3 m-2">
+
+       // TODAY
+        <div class="bg-body-finanzas">
+            <div class="row">
+                <div class="col">
+                    <h6>07/06/2023</h6>
+                </div>
+            </div>
+            <div class="row">
+                <p>Ventas: $1035</p>
+            </div>
+            <div class="row">
+                <p>Ganancias: $1035</p>
+            </div>
+        </div>
+
+       //MONTH
+        <div class="bg-body-finanzas">
+            <div class="row">
+                <div class="col">
+                    <h6>Julio 2023</h6>
+                </div>
+            </div>
+            <div class="row">
+                <p>Ventas: $1035</p>
+            </div>
+            <div class="row">
+                <p>Ganancias: $1035</p>
+            </div>
+        </div>
+
+       // YEAR
+        <div class="bg-body-finanzas">
+            <div class="row">
+                <div class="col">
+                    <h6>2023</h6>
+                </div>
+            </div>
+            <div class="row">
+                <p>Ventas: $1035</p>
+            </div>
+            <div class="row">
+                <p>Ganancias: $1035</p>
+            </div>
+        </div>
+    </div> 
+        -->
+
+        
+    <button class="btn btn-primary" onclick="window.location.replace('./homePage.html');">Back</button>
+</body>
+<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="../css/styles.css">
+<script type="module" src="../scripts/finanzasHome.js"></script>
+
+</html>
