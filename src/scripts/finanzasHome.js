@@ -1,24 +1,16 @@
 let finanzasList = window.api.getFinanzas();
 let finanzasRoot = document.getElementById('finanzasRoot');
-console.log(finanzasList)
 
 document.addEventListener('click', (e) => {
     if (e.target.id === 'submitBtn') {
+        
         searchByRange()
     }
 })
 
 init()
 
-function searchByRange() {
 
-    let dateFromPicker = returnDateFromPicker()
-    if (dateFromPicker !== undefined) {
-        let isBoth = dateFromPicker.split('al').length > 1
-        finanzasRoot.innerHTML = '<div class="bg-body-tertiary rounded shadow p-3 m-2"> <div class="bg-body-finanzas"> <div class="row"> <div class="col"> <h6>' + dateFromPicker + '</h6> </div> </div> <div class="row"> <p>Ventas: $1035</p> </div> <div class="row"> <p>Ganancias: $1035</p> </div> </div> </div>'
-    }
-    else (alert('Seleccione una fecha correctamente'))
-}
 
 function init() {
     verifyNull()
@@ -42,6 +34,31 @@ function verifyNull(){
     //Year
     finanzasList.finanzasYear[0].Total === null ? finanzasList.finanzasYear[0].Total = 0 : finanzasList.finanzasYear[0].Total
     finanzasList.finanzasYear[0].Total_Ganancias === null ? finanzasList.finanzasYear[0].Total_Ganancias = 0 : finanzasList.finanzasYear[0].Total_Ganancias
+
+}
+
+function searchByRange() {
+    let dateFromPicker = returnDateFromPicker()
+    if (dateFromPicker !== undefined) {
+        //let isBoth = dateFromPicker.split('al').length > 1
+        showFinanzasByRange(dateFromPicker)
+    }
+    else (alert('Seleccione una fecha correctamente'))
+}
+
+function showFinanzasByRange(dateFromPicker){
+    let dateStart = document.getElementById('dateStart').value
+    let dateEnd = document.getElementById('dateEnd').value
+
+    let dateStartSplit = dateStart.split('-')
+    let dateEndSplit = dateEnd.split('-')
+
+    dateStart = `${dateStartSplit[0]}/${dateStartSplit[1]}/${dateStartSplit[2]}`
+    dateEnd = `${dateEndSplit[0]}/${dateEndSplit[1]}/${dateEndSplit[2]}`
+    
+    let finanzasListByRange = window.api.getFinanzasByRange(dateStart, dateEnd)
+
+    finanzasRoot.innerHTML = '<div class="bg-body-tertiary rounded shadow p-3 m-2"> <div class="bg-body-finanzas"> <div class="row"> <div class="col"> <h6>' + dateFromPicker + '</h6> </div> </div> <div class="row"> <p>Ventas: $'+finanzasListByRange[0].Total+'</p> </div> <div class="row"> <p>Ganancias: $'+finanzasListByRange[0].Total_Ganancias+'</p> </div> </div> </div>'
 
 }
 

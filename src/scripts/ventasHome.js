@@ -20,7 +20,11 @@ function init(){
 
 
 document.addEventListener("click", (e) => {
-if(e.target.id === "submitBtn"){
+
+if(e.target.id === "createVentaBtn"){
+    window.location.replace("./createVentas.html")
+}
+    if(e.target.id === "submitBtn"){
     searchByRange()
 }
 

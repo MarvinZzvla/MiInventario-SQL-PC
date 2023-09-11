@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nueva venta</title>
+    
+</head>
+<body>
+    <div class="col-12 p-3 m-3 bg-body-tertiary text-center shadow rounded">
+        <h2>Nueva venta</h2>
+    </div>
+
+    <div class="main-box col-12 p-3 m-3 bg-body-tertiary shadow rounded">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle col-12" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Productos
+            </button>
+            <ul id="productosDropdown" class="dropdown-menu col-12">
+            </ul>
+          </div>
+
+          <div>
+            <form>
+                <!-- Campo de nombre -->
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">Producto:</label>
+                    <input type="text" class="form-control" id="nombre_input" placeholder="Producto">
+                </div>
+    
+                <!-- Precio de la venta -->
+                <div class="row">
+                <div class="mb-3 col">
+                    <label for="Precio" class="form-label col">Precio de la venta:</label>
+                    <input type="number" class="form-control" id="precio_input" placeholder="0$">
+                </div>
+
+                <!-- Cantidad vendida -->
+                <div class="mb-3 col">
+                    <label for="Precio" class="form-label">Cantidad:</label>
+                    <input type="number" class="form-control" id="cantidad_input" placeholder="0">
+                </div>
+            </div>
+    
+                <!-- Botón de envío -->
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+<button class="btn btn-secondary" onclick="window.location.replace('./ventasHome.html');">Back</button>
+<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+t>
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<link rel="stylesheet" href="../css/styles.css">
+<script type="module" src="../scripts/createVentas.js"></script>
+</html>

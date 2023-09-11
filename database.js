@@ -8,7 +8,7 @@ const db = new sqlite3(path.join(__dirname,"mysqlite.db"));
  * CRUD VENTAS
  *********************/
 exports.getVentas = (dateStart, dateEnd) => {
-    console.log("Esto es la fecha " + dateStart)
+    //console.log("Esto es la fecha " + dateStart)
     let stringQuery = "SELECT v.ID,v.Date, v.Quantity, v.Price, p.Price_Sell, p.Price Precio_Produccion, p.Name,p.Available  FROM VENTAS v INNER JOIN Productos p ON v.FK_Product = p.ID WHERE Date >= '"+dateStart+"' and Date <= '"+dateEnd+"'" 
     let query = db.prepare(stringQuery);
     const row = query.all();
@@ -75,6 +75,10 @@ exports.getFinanzas = () => {
    return FinanzasDefaults
 }
 
-exports.getFinanzasFilter = () => {
-    console.log("Hello")
+exports.getFinanzasByRange = (dateStart, dateEnd) => {
+    
+    let stringQuery = "SELECT SUM(Total) Total, SUM(Total_Ganancias) Total_Ganancias  FROM Finanzas WHERE Date >= '"+dateStart+"' and Date <= '"+dateEnd+"'" 
+    let query = db.prepare(stringQuery);
+    const row = query.all();
+    return row
 }

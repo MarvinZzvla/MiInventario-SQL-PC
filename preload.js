@@ -39,6 +39,10 @@ const getFinanzas = () =>{
     return database.getFinanzas()
 }
 
+const getFinanzasByRange = (dateStart,dateEnd) =>{
+    return database.getFinanzasByRange(dateStart,dateEnd)
+}
+
 
 contextBridge.exposeInMainWorld("api",{
     getVentas: getVentas,
@@ -46,5 +50,6 @@ contextBridge.exposeInMainWorld("api",{
     getProductos: getProductos,
     getUsers: getUsers,
     insertInfo: insertInfo,
-    getFinanzas: getFinanzas
+    getFinanzas: getFinanzas,
+    getFinanzasByRange: getFinanzasByRange
 })
