@@ -17,16 +17,23 @@
                 Productos
             </button>
             <ul id="productosDropdown" class="dropdown-menu col-12">
+        
             </ul>
           </div>
 
           <div>
-            <form>
+            <form id="formularioVenta">
                 <!-- Campo de nombre -->
-                <div class="mb-3">
+                <div class="row">
+                <div class="mb-3 col-10">
                     <label for="nombre" class="form-label">Producto:</label>
                     <input type="text" class="form-control" id="nombre_input" placeholder="Producto">
                 </div>
+
+                <div class="col mt-4">
+                    <button class="btn btn-primary mt-2" type="button" id="btnBuscarProducto">Buscar</button>
+                </div>
+            </div>
     
                 <!-- Precio de la venta -->
                 <div class="row">
@@ -43,7 +50,7 @@
             </div>
     
                 <!-- Botón de envío -->
-                <button type="submit" class="btn btn-primary">Enviar</button>
+                <button type="button" class="btn btn-primary" id="addBtn">Añadir</button>
             </form>
         </div>
     </div>
