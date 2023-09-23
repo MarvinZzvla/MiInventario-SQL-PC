@@ -10,7 +10,8 @@
     <div class="col-12 p-3 m-3 bg-body-tertiary text-center shadow rounded">
         <h2>Nueva venta</h2>
     </div>
-
+    <!-- Primera seccion para eligir un producto y rellanar un formulario para añadir el producto 
+    a un carrito de compras -->
     <div class="main-box col-12 p-3 m-3 bg-body-tertiary shadow rounded">
         <div class="dropdown">
             <button class="btn btn-primary dropdown-toggle col-12" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,12 +55,47 @@
             </form>
         </div>
     </div>
+    <!-- Fin de la primera seccion -->
+
+    <!-- Segunda sección: Aqui se mostrara una lista de los productos añadidos de la primera seccion.
+    Para poder hacer un resumen de la venta con su total o eliminar el producto de la lista -->
+    <div id="totalVenta" class="main-box col-12 p-3 m-3 bg-body-tertiary shadow rounded" style="display: none;">
+        <h2>Resumen de la venta</h2>
+        <!-- Header -->
+        <div class="container">
+            <div class="row">
+                <div class="col-4 mt-2 p-1" style="background-color:#0D66FF; margin-right:1px; border-radius: 10px 0 0 0;" ><h6 style="color:white">Producto</h6></div>
+                <div class="col-2 mt-2 p-1" style="background-color:#0D66FF; margin-right:1px"><h6 style="color:white">Precio</h6></div>
+                <div class="col-4 mt-2 p-1" style="background-color:#0D66FF"><h6 style="color:white">Cantidad</h6></div>
+                <div class="col mt-2 p-1" style="background-color:#0D66FF; border-radius: 0 10px 0 0;"></div>
+            
+            </div>
+        </div>
+        <!-- Productos -->
+        <div id="productosLista" class="container">
+            <div class="row mt-1 p-1" style="border: 1px solid #000;">
+                <!-- <div class="col-4 mt-2"><h6>Arroz</h6></div>
+                <div class="col-2 mt-2"><h6>300$</h6></div>
+                <div class="col-4 mt-2"><h6>1</h6></div>
+                <div class="col-1"><button class="btn btn-danger" id="btnDeleteProducto">Eliminar</button></div> -->
+            </div>
+            
+        </div>
+    
+        <!-- Total de la venta -->
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-4 mt-2"><h5>Total de la venta:</h5></div>
+                <div class="col-1 mt-2"><h5 id="total_venta" style="color: green;">300$</h5></div>
+                <div class="col"><button class="btn btn-success" style="font-weight:bold;">Pagar</button></div>
+            </div>
+        </div>
+    </div>
 
 </body>
 
 <button class="btn btn-secondary" onclick="window.location.replace('./ventasHome.html');">Back</button>
 <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
-t>
 <script src="../../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 <link rel="stylesheet" href="../css/styles.css">
 <script type="module" src="../scripts/createVentas.js"></script>

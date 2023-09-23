@@ -5,14 +5,24 @@ let productosDropdown = document.getElementById('productosDropdown')
 let nameProducto = document.getElementById('nombre_input')
 let precioVenta = document.getElementById('precio_input')
 let cantidadVenta = document.getElementById('cantidad_input')
+let cantidadAnterior = 1
+let boxTotalVenta = document.getElementById('totalVenta')
+let productosListaBox = document.getElementById('productosLista')
 let productoPosition = 0
 let actualProductoPosition = 0
 let productoActual;
 let findProduct = false
-const productosCart = [{'Total': 0}]
+const productosCart = []
+let totalVenta = 0
 cantidadVenta.value = 1
 console.log(listProducts)
 
+
+document.addEventListener('click', (e) => {
+if(e.target.id == 'btnDeleteProducto'){
+  deleteVentasCart(e.target)
+}
+})
 
 //Detectar cambios en el input 
 nameProducto.addEventListener('input', buscarProducto)
@@ -70,6 +80,7 @@ function buscarProducto(){
   let indice = 0
   actualProductoPosition = 0
   findProduct = false
+  
 
   //Se lee los productos para encontrar el producto por el nombre o codigo de barras
   listProducts.map((producto) => {
@@ -96,12 +107,28 @@ function buscarProducto(){
  * Caso contrario se resetea el formulario y se vuelve a comenzar
  ******************************************************************/
 function agregarProducto(){
+  //Desplegar la seccion para visualizar el resumen de la venta
+  boxTotalVenta.style.display= 'block';
   //Obtener el control del formulario de la venta
   var formularioVenta = document.getElementById('formularioVenta')
+  let producto = listProducts[actualProductoPosition - 1]
   //Si se encontro un producto añadirlo a la lista de objetos y reset el formulario
   if(findProduct && checkVenta()){
-    productosCart[0].Total += listProducts[actualProductoPosition - 1].Price_Sell *  parseInt(cantidadVenta.value)
-    productosCart.push(listProducts[actualProductoPosition - 1])
+    //Guardar en una variable la cantidad 
+    cantidadAnterior = parseInt(cantidadVenta.value)
+    //productosCart[0].Total += producto.Price_Sell *  parseInt(cantidadVenta.value)
+    //Sumar al total el precio del producto vendido por la cantidad vendida
+    totalVenta += producto.Price_Sell *  parseInt(cantidadVenta.value)
+    
+    //Se agrega al informacion del producto la cantidad vendida y el total vendido
+    producto.Cantidad = parseInt(cantidadVenta.value)
+    producto.Total = producto.Price_Sell *  parseInt(cantidadVenta.value)
+    
+    //Se guarda todo la informacion del producto en una lista de productos
+    productosCart.push(producto)
+    //Se muestra en pantalla los productos en el carrito
+    showVentas()
+    //Se resetea el formulario y se deja por defecto cantidad: 1
     formularioVenta.reset()
     cantidadVenta.value=1
     }
@@ -113,8 +140,9 @@ function agregarProducto(){
     }
 
     findProduct = false
-     console.log(productosCart)
+    // console.log(productosCart)
 }
+
 
 /*********************************************
  * Check venta 
@@ -126,3 +154,38 @@ function checkVenta(){
   }
   return true
 }
+
+function showVentas(){
+//Actualizar el total de la venta 
+document.getElementById('total_venta').innerHTML = totalVenta + '$'
+let counter = 0;
+productosListaBox.innerHTML = ''
+  productosCart.map((producto) => {
+    productosListaBox.innerHTML += '<div class="row mt-1 p-1" style="border: 1px solid #000;"> <div class="col-4 mt-2"><h6>'+producto.Name+'</h6></div> <div class="col-2 mt-2"><h6>'+producto.Price_Sell+'$</h6></div> <div class="col-4 mt-2"><h6>'+producto.Cantidad+'</h6></div> <div class="col-1"><button class="btn btn-danger" id="btnDeleteProducto" value="'+counter+'">Eliminar</button></div> </div>'
+    counter++
+  })
+
+  
+
+}
+
+function deleteVentasCart(elemento){
+  let precio = productosCart[elemento.value].Total
+  totalVenta -= precio
+  
+  //Boorar el producto seleccionado del carrito de compra
+  productosCart.splice(elemento.value,1)
+
+  //Si no hay nada en el carrito de compras, se oculta resumen de ventas y no puedes comprar
+  if(productosCart.length < 1){
+    boxTotalVenta.style.display= 'none';
+  }
+
+  //Pintar en pantalla el nuevo resumen de la venta actualizado
+showVentas()
+
+}
+
+
+
+
