@@ -4,9 +4,9 @@ const path = require('path');
 // Crear una instancia de la base de datos SQLite
 const db = new sqlite3(path.join(__dirname,"mysqlite.db"));
 
-/*****************
+/****************************************************************************************************************************************
  * CRUD VENTAS
- *********************/
+ ******************************************************************************************************************************************/
 exports.getVentas = (dateStart, dateEnd) => {
     //console.log("Esto es la fecha " + dateStart)
     let stringQuery = "SELECT v.ID,v.Date, v.Quantity, v.Price, p.Price_Sell, p.Price Precio_Produccion, p.Name,p.Available  FROM VENTAS v INNER JOIN Productos p ON v.FK_Product = p.ID WHERE Date >= '"+dateStart+"' and Date <= '"+dateEnd+"'" 
@@ -15,6 +15,10 @@ exports.getVentas = (dateStart, dateEnd) => {
     return row
 }
 
+/******************************************************************************************
+ * Create Ventas
+ * Crea una nueva venta y retorna el ID asignado
+ ********************************************************************************************/
 exports.createVentas = (producto) => {
 let date = new Date();
 date = date.toISOString().split('T')[0]
@@ -30,16 +34,58 @@ exports.deleteVentas = (id,table) => {
 
     return result.changes > 0
 }
+/************************************************************************************************************************
+ * CRUD PRODUCTOS
+ **************************************************************************************************************************/
 
+/**********************************************************
+ * Get Productos
+ * Obtiene toda la lista de productos disponibles
+ ****************************************************/
 exports.getProductos =() => {
     let query = db.prepare("SELECT * FROM PRODUCTOS");
     const row = query.all();
     return row
 }
+/********************************************************
+ * Create Producto
+ * Crea un nuevo producto y lo inserta en la table de productos
+ * con todas sus propiedades
+ *********************************************************/
+exports.createProducto = (thisProducto) => {
+    let producto = thisProducto[0]
+    let stringQuery = "INSERT INTO Productos (Name,Available,Price,Price_Sell,BarCode) VALUES (?,?,?,?,?)"
+    let query = db.prepare(stringQuery)
+    let result = query.run(producto.Name,producto.Cantidad, producto.Price, producto.Price_Sell, producto.BarCode)
+    return result.lastInsertRowid
+}
+/**********************************************************
+ * Update Producto
+ * Actualiza la cantidad de un solo producto
+ ************************************************************/
+exports.updateProducto =(producto) => {
+let cantidad = producto.Available - producto.Cantidad
+let stringQuery = "UPDATE Productos SET Available = ? WHERE id = ?"
+let query = db.prepare(stringQuery)
+let result = query.run(cantidad,producto.ID)
+return result.changes > 0
+}
 
-/**********************
+/***********************************************************
+ * Update ALL Producto
+ * Actualiza todas las propiedades de un producto
+ **************************************************************/
+exports.updateAllProducto = (thisProducto) => {
+    let producto = thisProducto[0]
+    let stringQuery = "UPDATE Productos SET Name = ?,Available = ?, Price = ?, Price_Sell=?,BarCode=? WHERE id = ?"
+    let query = db.prepare(stringQuery)
+    let result = query.run(producto.Name,producto.Cantidad, producto.Price, producto.Price_Sell, producto.BarCode, producto.ID)
+    return result.changes > 0
+}
+
+/********************************************************************************
  * CRUD USERS
- **********************/
+ ************************************************************************************/
 exports.getUsers = () => {
     let query = db.prepare("SELECT * FROM Usuarios");
     const row = query.all();
@@ -52,9 +98,9 @@ exports.insertInfo = () => {
     return result.lastInsertRowid
 }
 
-/***********************
+/****************************************************************************************
  * CRUD FINANZAS
- ************************/
+ *****************************************************************************************/
 exports.getFinanzas = () => {
 
     /******** READ TODAY **********/
@@ -84,6 +130,10 @@ exports.getFinanzas = () => {
    return FinanzasDefaults
 }
 
+/**********************************************************************************************
+ * Create Finanzas
+ * Crea una nueva finanza despues de una venta
+ *********************************************************************************************/
 exports.createFinanzas = (id,producto) => {
 var mydate = new Date().toISOString();
 mydate = mydate.split("T")[0].split("-").join("/")
@@ -96,6 +146,11 @@ const result = query.run(mydate,producto.Total,producto.Total_Ganancias,id)
  return result.lastInsertRowid
 }
 
+
+/******************************************************************************
+ * Get Finanzas by Range
+ * Busca las finanzas dentro de un rango de fecha seleccionado
+ ******************************************************************************/
 exports.getFinanzasByRange = (dateStart, dateEnd) => {
     
     let stringQuery = "SELECT SUM(Total) Total, SUM(Total_Ganancias) Total_Ganancias  FROM Finanzas WHERE Date >= '"+dateStart+"' and Date <= '"+dateEnd+"'" 

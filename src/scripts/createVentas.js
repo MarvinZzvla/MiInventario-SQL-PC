@@ -3,6 +3,7 @@ const listProducts = window.api.getProductos()
 let productosRoot = document.getElementById('productosRoot')
 let productosDropdown = document.getElementById('productosDropdown')
 let nameProducto = document.getElementById('nombre_input')
+let infoCantidad = document.getElementById('infoCantidad')
 let precioVenta = document.getElementById('precio_input')
 let cantidadVenta = document.getElementById('cantidad_input')
 let boxTotalVenta = document.getElementById('totalVenta')
@@ -99,7 +100,8 @@ function buscarProducto(){
   if(findProduct){
     precioVenta.value = listProducts[actualProductoPosition-1].Price_Sell
     nameProducto.value = listProducts[actualProductoPosition-1].Name
-  
+    infoCantidad.style.display = 'block'
+    infoCantidad.innerHTML = `Tienes ${listProducts[actualProductoPosition-1].Available} disponibles!`
     }
 
 }
@@ -139,6 +141,7 @@ function agregarProducto(){
     showVentas()
     //Se resetea el formulario y se deja por defecto cantidad: 1
     formularioVenta.reset()
+    infoCantidad.innerHTML=''
     cantidadVenta.value=1
     }
     //Caso contrario solo reset el formulario
@@ -209,22 +212,22 @@ function crearVentas(){
  
   productosCart.map((producto) => {
     const createProducto = window.api.createVentas(producto)
+    updateProducto(producto)
     updateFinanzas(createProducto,producto)
     
   })
+
+  window.location.replace("ventasHome.html")
 
 }
 
 function updateFinanzas(id,producto) {
   const updateFinanzas = window.api.createFinanzas(id,producto)
-  if(updateFinanzas > 0) {
-    window.location.replace("ventasHome.html")
-  }
 }
 
-function updateProducto(){
-  //CODE GOES HERE  
-}
+function updateProducto(producto){
+  const updateProducto = window.api.updateProducto(producto)
+ }
 
 
 

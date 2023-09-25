@@ -25,6 +25,20 @@ const getProductos = () =>{
     return database.getProductos()
 }
 
+//Crea un nuevo prodcuto
+const createProducto = (producto) => {
+    return database.createProducto(producto)
+}
+
+//Solo actualiza la cantidad de un producto
+const updateProducto = (producto) =>{
+    return database.updateProducto(producto)
+}
+//Actualiza todos los campos de un producto
+const updateAllProducto = (producto) =>{
+    return database.updateAllProducto(producto)
+}
+
 /***************************
  * CRUD USER
  ****************************/
@@ -52,12 +66,19 @@ const getFinanzasByRange = (dateStart,dateEnd) =>{
 
 
 contextBridge.exposeInMainWorld("api",{
+    //CRUD VENTAS
     getVentas: getVentas,
     createVentas: createVentas,
     deleteVentas: deleteVentas,
+    //CRUD PRODUCTOS
     getProductos: getProductos,
+    createProducto,createProducto,
+    updateProducto: updateProducto,
+    updateAllProducto: updateAllProducto,
+    //CRUD USERS
     getUsers: getUsers,
     insertInfo: insertInfo,
+    //CRUD FINANZAS
     getFinanzas: getFinanzas,
     createFinanzas: createFinanzas,
     getFinanzasByRange: getFinanzasByRange
