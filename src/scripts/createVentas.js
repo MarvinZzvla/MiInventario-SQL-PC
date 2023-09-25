@@ -5,7 +5,6 @@ let productosDropdown = document.getElementById('productosDropdown')
 let nameProducto = document.getElementById('nombre_input')
 let precioVenta = document.getElementById('precio_input')
 let cantidadVenta = document.getElementById('cantidad_input')
-let cantidadAnterior = 1
 let boxTotalVenta = document.getElementById('totalVenta')
 let productosListaBox = document.getElementById('productosLista')
 let productoPosition = 0
@@ -17,10 +16,15 @@ let totalVenta = 0
 cantidadVenta.value = 1
 console.log(listProducts)
 
-
+//Detectar los clicks en la pantalla
 document.addEventListener('click', (e) => {
+  //Si el click se hace el boton de borrar producto llamar funcion borrar
 if(e.target.id == 'btnDeleteProducto'){
   deleteVentasCart(e.target)
+}
+//Si el click se hace en el boton de pagar llamar la funcion crear venta
+if(e.target.id == 'pagarBtn'){
+  crearVentas()
 }
 })
 
@@ -109,13 +113,12 @@ function buscarProducto(){
 function agregarProducto(){
   //Desplegar la seccion para visualizar el resumen de la venta
   boxTotalVenta.style.display= 'block';
+  
   //Obtener el control del formulario de la venta
   var formularioVenta = document.getElementById('formularioVenta')
   let producto = listProducts[actualProductoPosition - 1]
   //Si se encontro un producto añadirlo a la lista de objetos y reset el formulario
   if(findProduct && checkVenta()){
-    //Guardar en una variable la cantidad 
-    cantidadAnterior = parseInt(cantidadVenta.value)
     //productosCart[0].Total += producto.Price_Sell *  parseInt(cantidadVenta.value)
     //Sumar al total el precio del producto vendido por la cantidad vendida
     totalVenta += producto.Price_Sell *  parseInt(cantidadVenta.value)
@@ -123,9 +126,15 @@ function agregarProducto(){
     //Se agrega al informacion del producto la cantidad vendida y el total vendido
     producto.Cantidad = parseInt(cantidadVenta.value)
     producto.Total = producto.Price_Sell *  parseInt(cantidadVenta.value)
-    
+    producto.Total_Ganancias = producto.Price * producto.Cantidad
+    //Guardar todos los datos en una variable nueva para que no se actualizen los datos de los objetos antiguos
+    var newProducto = {Available: producto.Available,BarCode:producto.BarCode,ID:producto.ID,Price:producto.Price,
+                      Name: producto.Name, Price_Sell: producto.Price_Sell, 
+                      Total: producto.Total, Cantidad: producto.Cantidad, Total_Ganancias: producto.Total_Ganancias}
+
+  
     //Se guarda todo la informacion del producto en una lista de productos
-    productosCart.push(producto)
+    productosCart.push(newProducto)
     //Se muestra en pantalla los productos en el carrito
     showVentas()
     //Se resetea el formulario y se deja por defecto cantidad: 1
@@ -155,20 +164,30 @@ function checkVenta(){
   return true
 }
 
+/**********************************************************
+ * Show ventas
+ * Esta es una funcion que sirve para mostrar en pantalla
+ * lo que se encuentra en el carrito, se rehace todo para
+ * actualizar el carrito
+ ********************************************************/
 function showVentas(){
 //Actualizar el total de la venta 
 document.getElementById('total_venta').innerHTML = totalVenta + '$'
 let counter = 0;
 productosListaBox.innerHTML = ''
+//Por cada producto en el carrito de compra dibujar en el HTML un nuevo item con su nombre, precio y cantidad con su boton de eliminar
   productosCart.map((producto) => {
     productosListaBox.innerHTML += '<div class="row mt-1 p-1" style="border: 1px solid #000;"> <div class="col-4 mt-2"><h6>'+producto.Name+'</h6></div> <div class="col-2 mt-2"><h6>'+producto.Price_Sell+'$</h6></div> <div class="col-4 mt-2"><h6>'+producto.Cantidad+'</h6></div> <div class="col-1"><button class="btn btn-danger" id="btnDeleteProducto" value="'+counter+'">Eliminar</button></div> </div>'
     counter++
   })
-
-  
-
 }
 
+/**********************************************************
+ * Delete ventas Cart
+ * Esta funcion elimina del carrito el producto
+ * Resta el precio del producto multiplicado por la cantidad 
+ * Al total del resumen de la venta 
+ ***********************************************************/
 function deleteVentasCart(elemento){
   let precio = productosCart[elemento.value].Total
   totalVenta -= precio
@@ -184,6 +203,27 @@ function deleteVentasCart(elemento){
   //Pintar en pantalla el nuevo resumen de la venta actualizado
 showVentas()
 
+}
+
+function crearVentas(){
+ 
+  productosCart.map((producto) => {
+    const createProducto = window.api.createVentas(producto)
+    updateFinanzas(createProducto,producto)
+    
+  })
+
+}
+
+function updateFinanzas(id,producto) {
+  const updateFinanzas = window.api.createFinanzas(id,producto)
+  if(updateFinanzas > 0) {
+    window.location.replace("ventasHome.html")
+  }
+}
+
+function updateProducto(){
+  //CODE GOES HERE  
 }
 
 

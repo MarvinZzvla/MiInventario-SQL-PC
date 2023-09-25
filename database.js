@@ -15,6 +15,15 @@ exports.getVentas = (dateStart, dateEnd) => {
     return row
 }
 
+exports.createVentas = (producto) => {
+let date = new Date();
+date = date.toISOString().split('T')[0]
+let stringQuery = 'INSERT INTO Ventas (FK_Product,Date,Quantity,Price) VALUES(?,?,?,?)'
+const query = db.prepare(stringQuery)
+const result = query.run(producto.ID,date.toString(),producto.Cantidad,producto.Total)
+return result.lastInsertRowid
+}
+
 exports.deleteVentas = (id,table) => {
     let query = db.prepare("DELETE FROM " +table+" WHERE ID = ?");
     let result = query.run(id)
@@ -73,6 +82,18 @@ exports.getFinanzas = () => {
     }
 
    return FinanzasDefaults
+}
+
+exports.createFinanzas = (id,producto) => {
+var mydate = new Date().toISOString();
+mydate = mydate.split("T")[0].split("-").join("/")
+let stringQuery = 'INSERT INTO Finanzas (Date,Total,Total_Ganancias,FK_VENTA) VALUES(?,?,?,?)'
+let query = db.prepare(stringQuery)
+const result = query.run(mydate,producto.Total,producto.Total_Ganancias,id)
+
+// const query = db.prepare(stringQuery)
+// const result = query.run(producto.ID,date.toString(),producto.Cantidad,producto.Total)
+ return result.lastInsertRowid
 }
 
 exports.getFinanzasByRange = (dateStart, dateEnd) => {
