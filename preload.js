@@ -16,7 +16,6 @@ const deleteVentas = (id, table) =>{
     return database.deleteVentas(id,table)
 }
 
-
 /*****************************
  * CRUD PRODUCTOS
  *****************************/
@@ -44,6 +43,10 @@ const updateAllProducto = (producto) =>{
  ****************************/
 const getUsers = () =>{
 return database.getUsers()
+}
+
+const createUser = (user) => {
+    return database.createUser(user)
 }
 
 const insertInfo = () =>{
@@ -77,6 +80,7 @@ contextBridge.exposeInMainWorld("api",{
     updateAllProducto: updateAllProducto,
     //CRUD USERS
     getUsers: getUsers,
+    createUser: createUser,
     insertInfo: insertInfo,
     //CRUD FINANZAS
     getFinanzas: getFinanzas,

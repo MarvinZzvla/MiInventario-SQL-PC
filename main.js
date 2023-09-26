@@ -9,10 +9,11 @@ app.on('ready', createWindow);
 function createWindow() {
   // Crear una nueva ventana del navegador
   const mainWindow = new BrowserWindow({
-    width: 800,
+    width: 900,
     height: 600,
-    minWidth: 720,
+    minWidth: 900,
     minHeight: 600,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
       devTools: true,

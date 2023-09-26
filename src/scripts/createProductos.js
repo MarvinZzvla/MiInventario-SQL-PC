@@ -25,13 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     document.getElementById('addBtn').addEventListener('click', () => {
-        if(isEdit){
-            editProducto()
-        }
-        else{
-            addProducto()
-        }
-        
+        isEdit? editProducto() : addProducto()
         })
 
 })
@@ -45,6 +39,7 @@ function showInfoProducto(producto) {
 }
 
 function editProducto(){
+   
 const editProducto = [{ID: idProducto,Name: name.value, Price: costo.value, BarCode : barcode.value,Price_Sell: price.value, Cantidad: cantidad.value}]
 //console.log(editProducto)
 const updateAllProducto = window.api.updateAllProducto(editProducto)
@@ -55,6 +50,7 @@ if(updateAllProducto){
 }
 
 function addProducto(){
+    
 const newProducto = [{Name: name.value, Price: parseInt(costo.value), BarCode : parseInt(barcode.value)
     ,Price_Sell: parseInt(price.value), Cantidad: parseInt(cantidad.value)}]
 const createProducto = window.api.createProducto(newProducto)
