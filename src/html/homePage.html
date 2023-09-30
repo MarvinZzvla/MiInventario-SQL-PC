@@ -10,45 +10,73 @@
 </head>
 
 <body>
-<div class="row m-3">
-    <div class="col-12 p-2 text-center bg-body-tertiary rounded shadow">
-        <h2>Mi inventario</h2>
+    <div class="row m-3">
+        <div class="col-12 p-2 text-center bg-body-tertiary rounded shadow">
+            <h2 id="title_bussiness" class="title_life">Mi inventario</h2>
+        </div>
     </div>
-</div>
 
-<div class="row m-3 d-flex align-items-center justify-content-center">
-    <div class="col-10 p-2 text-center bg-body-tertiary rounded shadow">
-        <a href="./ventasHome.html"><h4>Ventas</h4></a>
-    </div>
-</div>
-<div class="row m-3 d-flex align-items-center justify-content-center">
-    <div class="col-10 p-2 text-center bg-body-tertiary rounded shadow">
-        <a href="./productosHome.html"><h4>Productos</h4></a>
-    </div>
-</div>
-<div class="row m-3 d-flex align-items-center justify-content-center">
-    <div class="col-10 p-2 text-center bg-body-tertiary rounded shadow">
-        <a href="./finanzasHome.html"><h4>Finanzas</h4></a>
-    </div>
-</div>
-<div class="row m-3 d-flex align-items-center justify-content-center">
-    <div class="col-10 p-2 text-center bg-body-tertiary rounded shadow">
-        <a href="./usuariosHome.html"><h4>Usuarios</h4></a>
-    </div>
-</div>
+    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow" style="width: 96%;">
+        <div class="col-1" style="z-index: 3;">
+            <img src="../img/venta.png" alt="ventas" width="64px" height="64px">
+        </div>
+        <div class="col p-4 text-center">
+                <a href="./ventasHome.html"><h4 id="ventasBox">Ventas</h4></a>
+        </div>
+        <div class="col-1"></div>
 
-<div class="row m-3 d-flex align-items-center justify-content-center" >
-    <button onclick="logout()" class="col-8 btn btn-primary">Cerrar sesion</button>
-</div>
+    </div>
+
+    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow" style="width: 96%;">
+        <div class="col-1" style="z-index: 3;">
+            <img src="../img/producto.png" alt="ventas" width="64px" height="64px">
+        </div>
+        <div class="col p-4 text-center">
+                <a href="./productosHome.html"><h4 id="productosBox">Productos</h4></a>
+        </div>
+        <div class="col-1"></div>
+
+    </div>
+
+
+    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow" style="width: 96%;">
+        <div class="col-1" style="z-index: 3;">
+            <img src="../img/finanzas.png" alt="ventas" width="64px" height="64px">
+        </div>
+        <div class="col p-4 text-center">
+                <a href="./finanzasHome.html"><h4 id="finanzasBox">Finanzas</h4></a>
+        </div>
+        <div class="col-1"></div>
+
+    </div>
+
+    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow" style="width: 96%;">
+        <div class="col-1" style="z-index: 3;">
+            <img src="../img/users.png" alt="ventas" width="64px" height="64px">
+        </div>
+        <div class="col p-4 text-center">
+                <a href="./usuariosHome.html"><h4 id="usuariosBox">Usuarios</h4></a>
+        </div>
+        <div class="col-1"></div>
+
+    </div>
+
+    <div class="row m-3 d-flex align-items-center justify-content-center">
+        <button onclick="logout()" class="col-8 btn btn-danger">Cerrar sesion</button>
+    </div>
+
 </body>
 
 <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="../css/styles.css">
 <script type="module" src="../scripts/homepage.js"></script>
+<link rel="stylesheet" href="../../node_modules/shepherd.js/dist/css/shepherd.css">
+<script src="../../node_modules/shepherd.js/dist/js/shepherd.min.js"></script>
+<script src="../scripts/intro/homePageIntro.js"></script>
 <script>
     function logout() {
-        localStorage.clear();
+        localStorage.setItem('isLogged',false)
         window.location.replace('./index.html');
     }
 

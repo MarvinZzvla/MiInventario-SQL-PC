@@ -1,5 +1,8 @@
+
 let finanzasList = window.api.getFinanzas();
 let finanzasRoot = document.getElementById('finanzasRoot');
+
+
 
 document.addEventListener('click', (e) => {
     if (e.target.id === 'submitBtn') {
@@ -58,6 +61,11 @@ function showFinanzasByRange(dateFromPicker){
     
     let finanzasListByRange = window.api.getFinanzasByRange(dateStart, dateEnd)
 
+    if( finanzasListByRange[0].Total == null){
+        finanzasListByRange[0].Total = 0
+        finanzasListByRange[0].Total_Ganancias = 0
+    }
+   
     finanzasRoot.innerHTML = '<div class="bg-body-tertiary rounded shadow p-3 m-2"> <div class="bg-body-finanzas"> <div class="row"> <div class="col"> <h6>' + dateFromPicker + '</h6> </div> </div> <div class="row"> <p>Ventas: $'+finanzasListByRange[0].Total+'</p> </div> <div class="row"> <p>Ganancias: $'+finanzasListByRange[0].Total_Ganancias+'</p> </div> </div> </div>'
 
 }

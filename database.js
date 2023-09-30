@@ -92,6 +92,7 @@ exports.getUsers = () => {
     return row
 }
 
+
 exports.createUser = (user) => {
     //let stringQuery = 'INSERT INTO Ventas (FK_Product,Date,Quantity,Price) VALUES(?,?,?,?)'
     let stringQuery = 'INSERT INTO Usuarios (Name,Lastname, BussinessName,Password,Admin,Phone,Email) VALUES (?,?,?,?,?,?,?)'

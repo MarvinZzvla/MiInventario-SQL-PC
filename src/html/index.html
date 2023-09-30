@@ -30,7 +30,7 @@
                         </div>
                         <div class="container ">
                             <p style="font-weight: bold;">¿Eres nuevo?</p>
-                            <button id="btnRegister" class="btn btn-danger" onclick="window.location.replace('createUsuarios.html')">Registrar</button>
+                            <button id="btnRegister" class="btn btn-danger" onclick="window.location.replace('createUsuarios.html'); localStorage.setItem('firstTime',true)">Registrar</button>
                         </div>
                     </form>
                     <div id="alertValid" style="margin-top: 20px; display: grid" class="alert alert-danger" role="alert">
@@ -41,15 +41,13 @@
         </div>
     </div>
 
-    <!-- <div class="alert alert-danger position-absolute top-50" role="alert">
-            A simple danger alert—check it out!
-        </div> -->
-
-
-
 </body>
+
 <script type="module" src="../scripts/index.js"></script>
 <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../../node_modules/shepherd.js/dist/css/shepherd.css">
+<script src="../../node_modules/shepherd.js/dist/js/shepherd.min.js"></script>
+<script src="../scripts/intro/indexIntro..js"></script>
 
 </html>

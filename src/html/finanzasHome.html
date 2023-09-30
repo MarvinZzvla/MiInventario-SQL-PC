@@ -18,31 +18,35 @@
 
     <div class="bg-body-tertiary shadow rounded p-2 ">
         <div class="row">
+            
             <div class="col-3">
                 <label for="datepicker">Fecha Inicio:</label>
             </div>
+            <div class="col-1"></div>
             <div class="col-3">
                 <label for="datepicker">Fecha Final:</label>
             </div>
         </div>
         <div class="row">
-            
+        
             <div class="col-3">
-                <input type="date" id="dateStart" name="datepicker">
+                <input type="text" id="dateStart" class="datepicker" name="datepicker">
             </div>
+            <div class="col-1"></div>
             <div class="col-3">
-                <input type="date" id="dateEnd" name="datepicker">
+                <input type="text" id="dateEnd" class="datepicker" name="datepicker">
             </div>
+            <div class="col-1"></div>
             <div class="col">
-                <button type="submit" class="btn btn-primary" id="submitBtn" >Buscar</button>
+                <button type="submit" class="btn btn-primary" id="submitBtn" style="width: 100%;">Buscar</button>
             </div>
-    
+
         </div>
     </div>
 
     <div id="finanzasRoot"></div>
 
-   
+
 
     <!--
 
@@ -95,12 +99,29 @@
     </div> 
         -->
 
-        
+
     <button class="btn btn-primary" onclick="window.location.replace('./homePage.html');">Back</button>
 </body>
 <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../../node_modules/flatpickr/dist/flatpickr.css">
 <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../../node_modules/flatpickr/dist/flatpickr.js"></script>
+<script src="../../node_modules//flatpickr/dist/l10n/es.js"></script>
 <link rel="stylesheet" href="../css/styles.css">
 <script type="module" src="../scripts/finanzasHome.js"></script>
+
+<script>
+    // Inicializa Flatpickr en el campo de entrada con el ID "datepicker"
+   
+    flatpickr(".datepicker", {
+        altInput: true,
+        locale:"es",
+        altFormat: "F j, Y",
+        dateFormat: "Y-m-d",
+        
+    });
+
+   
+</script>
 
 </html>

@@ -3,9 +3,7 @@ const alertLogin = document.getElementById('alertValid');
 document.addEventListener('DOMContentLoaded', () => {
     alertLogin.style.display = 'none';
 
-
-
-    if (localStorage.getItem('isLogged') === 'true') {
+    if (localStorage.getItem('isLogged') == 'true') {
         window.location.replace("./homePage.html");
     }
 })
@@ -45,4 +43,5 @@ function saveSession(user) {
     localStorage.setItem('Name', user.Name + ' ' + user.Lastname)
     localStorage.setItem('Phone', user.Phone)
     localStorage.setItem('isLogged', true)
+    localStorage.setItem('firstTime',true)
 }
