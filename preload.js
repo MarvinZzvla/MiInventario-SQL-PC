@@ -24,6 +24,10 @@ const getProductos = () =>{
     return database.getProductos()
 }
 
+const getProductosId = (idProduct) =>{
+    return database.getProductosId(idProduct)
+}
+
 //Crea un nuevo prodcuto
 const createProducto = (producto) => {
     return database.createProducto(producto)
@@ -33,6 +37,12 @@ const createProducto = (producto) => {
 const updateProducto = (producto) =>{
     return database.updateProducto(producto)
 }
+
+//Actualiza la cantidad de una venta eliminada
+const incrementProducto = (idProducto,cantidad) =>{
+    return database.incrementProducto(idProducto,cantidad)
+}
+
 //Actualiza todos los campos de un producto
 const updateAllProducto = (producto) =>{
     return database.updateAllProducto(producto)
@@ -75,9 +85,11 @@ contextBridge.exposeInMainWorld("api",{
     deleteVentas: deleteVentas,
     //CRUD PRODUCTOS
     getProductos: getProductos,
+    getProductosId: getProductosId,
     createProducto,createProducto,
     updateProducto: updateProducto,
     updateAllProducto: updateAllProducto,
+    incrementProducto:incrementProducto,
     //CRUD USERS
     getUsers: getUsers,
     createUser: createUser,

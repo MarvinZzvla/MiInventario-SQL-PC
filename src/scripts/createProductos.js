@@ -31,10 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 function showInfoProducto(producto) {
+    console.log(producto)
     name.value = producto.Name
     costo.value = producto.Price
     barcode.value = producto.BarCode
-    price.value = producto.Price
+    price.value = producto.Price_Sell
     cantidad.value = producto.Available
 }
 

@@ -123,15 +123,15 @@ function agregarProducto(){
   if(findProduct && checkVenta()){
     //productosCart[0].Total += producto.Price_Sell *  parseInt(cantidadVenta.value)
     //Sumar al total el precio del producto vendido por la cantidad vendida
-    totalVenta += producto.Price_Sell *  parseInt(cantidadVenta.value)
+    totalVenta += precioVenta.value *  parseInt(cantidadVenta.value)
     
     //Se agrega al informacion del producto la cantidad vendida y el total vendido
     producto.Cantidad = parseInt(cantidadVenta.value)
-    producto.Total = producto.Price_Sell *  parseInt(cantidadVenta.value)
-    producto.Total_Ganancias = producto.Price * producto.Cantidad
+    producto.Total = precioVenta.value *  parseInt(cantidadVenta.value)
+    producto.Total_Ganancias = (precioVenta.value - producto.Price) * producto.Cantidad
     //Guardar todos los datos en una variable nueva para que no se actualizen los datos de los objetos antiguos
     var newProducto = {Available: producto.Available,BarCode:producto.BarCode,ID:producto.ID,Price:producto.Price,
-                      Name: producto.Name, Price_Sell: producto.Price_Sell, 
+                      Name: producto.Name, Price_Sell: precioVenta.value, 
                       Total: producto.Total, Cantidad: producto.Cantidad, Total_Ganancias: producto.Total_Ganancias}
 
   

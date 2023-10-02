@@ -13,10 +13,11 @@ function createWindow() {
     height: 640,
     minWidth: 935,
     minHeight: 640,
+    icon: path.join(__dirname, 'inventario.ico'),
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
-      devTools: true,
+      devTools: false,
       preload: path.join(__dirname,"preload.js"),
     },
   });

@@ -1,6 +1,8 @@
 const listUsers = window.api.getUsers();
+let bussiness_name = ''
+
 if(listUsers.length >  0){
-    let bussiness_name = listUsers[0].BussinessName
+     bussiness_name = listUsers[0].BussinessName
 }
 
 

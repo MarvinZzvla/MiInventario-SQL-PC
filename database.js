@@ -4,12 +4,13 @@ const path = require('path');
 // Crear una instancia de la base de datos SQLite
 const db = new sqlite3(path.join(__dirname,"mysqlite.db"));
 
+
 /****************************************************************************************************************************************
  * CRUD VENTAS
  ******************************************************************************************************************************************/
 exports.getVentas = (dateStart, dateEnd) => {
     //console.log("Esto es la fecha " + dateStart)
-    let stringQuery = "SELECT v.ID,v.Date, v.Quantity, v.Price, p.Price_Sell, p.Price Precio_Produccion, p.Name,p.Available  FROM VENTAS v INNER JOIN Productos p ON v.FK_Product = p.ID WHERE Date >= '"+dateStart+"' and Date <= '"+dateEnd+"'" 
+    let stringQuery = "SELECT v.ID,v.Date, v.Quantity, v.Price, p.Price_Sell,v.FK_Product idProducto, p.Price Precio_Produccion, p.Name,p.Available  FROM VENTAS v INNER JOIN Productos p ON v.FK_Product = p.ID WHERE Date >= '"+dateStart+"' and Date <= '"+dateEnd+"'" 
     let query = db.prepare(stringQuery);
     const row = query.all();
     return row
@@ -47,6 +48,16 @@ exports.getProductos =() => {
     const row = query.all();
     return row
 }
+
+/************************************************************
+ * Get Productos ID
+ * Obtiene un producto con su ID
+ **********************************************************/
+exports.getProductosId =(idProducto) => {
+    let query = db.prepare("SELECT * FROM PRODUCTOS WHERE ID ="+idProducto);
+    const row = query.all()
+    return row
+}
 /********************************************************
  * Create Producto
  * Crea un nuevo producto y lo inserta en la table de productos
@@ -69,6 +80,17 @@ let stringQuery = "UPDATE Productos SET Available = ? WHERE id = ?"
 let query = db.prepare(stringQuery)
 let result = query.run(cantidad,producto.ID)
 return result.changes > 0
+}
+
+/************************************************************
+ * INCREMENT PRODUCTO
+ * Al eliminar una venta devolver la cantidad 
+ **************************************************************/
+exports.incrementProducto = (idProducto, cantidad) =>{
+    let stringQuery = "UPDATE Productos SET Available = ? WHERE id = ?"
+    let query = db.prepare(stringQuery)
+    let result = query.run(cantidad, idProducto)
+    return result.changes > 0
 }
 
 /***********************************************************

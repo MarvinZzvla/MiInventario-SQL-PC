@@ -112,9 +112,10 @@ tour.addStep({
     },
     {
       action() {
+        localStorage.setItem('firstTimeVentasHome',false)
         return this.next();
       },
-      text: 'Siguiente'
+      text: 'Ok'
     }
   ],
   id: 'creating'
