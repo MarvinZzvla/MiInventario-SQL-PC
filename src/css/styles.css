@@ -45,3 +45,17 @@ h1 {
     color: white;
 }
 
+/* Cambiar el ancho y alto del contenedor */
+#paypal-button-container {
+    border-radius: 20px;
+    width: 220px; /* Ancho personalizado */
+    height: 120px; /* Alto personalizado */
+  }
+  
+  /* Cambiar otros estilos, como el color de fondo o el texto */
+  #paypal-button-container {
+    background-color: #fff; /* Color de fondo personalizado */
+    color: #fff; /* Color de texto personalizado */
+    font-size: 18px; /* Tamaño de fuente personalizado */
+  }
+  
