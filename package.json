@@ -16,6 +16,8 @@
     "awesomplete": "^1.1.5",
     "better-sqlite3": "^8.7.0",
     "bootstrap": "^5.3.0",
+    "electron-dialog": "^2.0.0",
+    "electron-updater": "^6.1.4",
     "flatpickr": "^4.6.13",
     "shepherd.js": "^11.2.0"
   },
@@ -28,6 +30,13 @@
     "appId": "com.vendetta.miinventario",
     "asar": false,
     "productName": "Mi Inventario",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "MarvinZzvla",
+        "repo": "MiInventario-SQL-PC"
+      }
+    ],
     "directories": {
       "output": "dist"
     },
