@@ -77,6 +77,17 @@ const getFinanzasByRange = (dateStart,dateEnd) =>{
     return database.getFinanzasByRange(dateStart,dateEnd)
 }
 
+/**************************************************************
+ * CRUD PAGOS
+ ************************************************************/
+const checkSubscription = () =>{
+    return database.checkSubscription()
+}
+
+const updateSubscription = (dateCompra,dateExpired) =>{
+    return database.updateSubscription(dateCompra,dateExpired)
+}
+
 
 contextBridge.exposeInMainWorld("api",{
     //CRUD VENTAS
@@ -97,5 +108,8 @@ contextBridge.exposeInMainWorld("api",{
     //CRUD FINANZAS
     getFinanzas: getFinanzas,
     createFinanzas: createFinanzas,
-    getFinanzasByRange: getFinanzasByRange
+    getFinanzasByRange: getFinanzasByRange,
+    //CRUD DATA PAGO
+    checkSubscription: checkSubscription,
+    updateSubscription: updateSubscription
 })

@@ -190,3 +190,24 @@ exports.getFinanzasByRange = (dateStart, dateEnd) => {
     const row = query.all();
     return row
 }
+
+
+/*********************************************************************************
+ * GET DATA FROM DATA
+ * Para Registrar los pagos o subscripciones
+ *********************************************************************************/
+exports.checkSubscription = () => {
+    let stringQuery = "SELECT * FROM DATA"
+    let query = db.prepare(stringQuery);
+    const row = query.all();
+    return row
+}
+/*********************************************************************************
+ * UPDATE SUBSCRIPTION
+ **********************************************************************************/
+exports.updateSubscription = (DateCompra,DateExpired) => {
+    let stringQuery = "UPDATE Data SET Pay = ?,DateCompra = ?, DateExpired = ? WHERE ID = ?"
+    let query = db.prepare(stringQuery)
+    let result = query.run(1,DateCompra,DateExpired,1)
+    return result.changes > 0
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' https://www.paypal.com https://www.gstatic.com https://www.googletagmanager.com" >
+    
+    <title>Pagar subscripcion mensual</title>
+</head>
+
+<body>
+    <div class="container p-2 text-center bg-body-tertiary rounded shadow">
+        <h2>Para continuar usando nuestros producto, debe pagar la subscripcion</h2>
+        <h3>Precio: $20 USD</h3>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-2"></div>
+                <div id="paypal-button-container" class="col-8"></div>
+                <div class="col-2"></div>
+            </div>
+        </div>
+
+    </div>
+    <h1 style="text-align: center;">O</h1>
+    <div class="container p-2 text-center bg-body-tertiary rounded shadow">
+        <h2>Introducir el codigo correspondiente</h2>
+        <h4 id="test_text" style="display: none;">Prueba gratis! Codigo: Prueba</h4>
+        <label for="code">Introducir el codigo</label>
+        <input id="token_id" label="code" type="text">
+        <button id="pagarBtn" class="btn btn-primary">Enviar</button>
+    </div>
+
+    <div id="alertValid" style="margin-top: 20px; display: none" class="alert alert-danger" role="alert">
+        <h3 style="text-align: center;">El codigo no es el correcto, verifica o ponte en contacto con nosotros</h3>
+    </div>
+
+</body>
+
+<button class="btn btn-danger mt-3" onclick="window.location.replace('./homePage.html')">Regresar</button>
+
+<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="../css/styles.css">
+<!-- Incluir el script de PayPal -->
+<script src="https://www.paypal.com/sdk/js?client-id=AevhisGeeuKjL_ZIK1dMWGl3WgSe0jAybcjfQ85jkGSZbLoN5ahrOOy1byOPDIK0sTgvD-q0QrR9BCbQ"></script>
+<script type="module" src="../scripts/paypal.js"></script>
+<script type="module" src="../scripts/pagarPaypal.js"></script>
+
+
+</html>

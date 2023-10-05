@@ -48,8 +48,6 @@ h1 {
 /* Cambiar el ancho y alto del contenedor */
 #paypal-button-container {
     border-radius: 20px;
-    width: 220px; /* Ancho personalizado */
-    height: 120px; /* Alto personalizado */
   }
   
   /* Cambiar otros estilos, como el color de fondo o el texto */
