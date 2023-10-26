@@ -1,10 +1,11 @@
-const sqlite3 = require('better-sqlite3');
-const path = require('path');
+const{ipcRenderer} = require('electron');
 
-// Crear una instancia de la base de datos SQLite
-const db = new sqlite3(path.join(__dirname,"mysqlite.db"));
-
-
+ipcRenderer.send('userData');
+ipcRenderer.on('db-path',(event,data) => {
+    const sqlite3 = require('better-sqlite3');
+    const db = new sqlite3(data);
+    
+    
 /****************************************************************************************************************************************
  * CRUD VENTAS
  ******************************************************************************************************************************************/
@@ -211,3 +212,4 @@ exports.updateSubscription = (DateCompra,DateExpired) => {
     let result = query.run(1,DateCompra,DateExpired,1)
     return result.changes > 0
 }
+})

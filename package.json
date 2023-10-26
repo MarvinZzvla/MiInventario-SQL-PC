@@ -1,16 +1,16 @@
 {
   "name": "mi-inventario-electron",
-  "version": "1.0.1",
-  "description": "",
+  "version": "1.0.2",
+  "description": "Mi Inventario una app de gestion de inventario",
   "main": "main.js",
   "scripts": {
     "dev": "electron .",
     "start": "babel-node main.js",
-    "build": "electron-packager . MiInventario -w electron-rebuild",
+    "build": "electron-builder",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Marvin H. Zavala",
+  "author": "Vendetta",
   "license": "MIT",
   "dependencies": {
     "awesomplete": "^1.1.5",
@@ -33,8 +33,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "MarvinZzvla",
-        "repo": "MiInventario-SQL-PC"
+        "owner": "marvinzzvla",
+        "repo": "miinventario-sql-pc"
       }
     ],
     "directories": {
@@ -43,6 +43,12 @@
     "win": {
       "target": "nsis",
       "icon": "inventario.ico"
+    },
+    "nsis": {
+      "oneClick": false, 
+      "perMachine": true, 
+      "allowElevation": true,  
+      "allowToChangeInstallationDirectory": false
     }
   }
 }

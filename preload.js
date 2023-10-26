@@ -1,6 +1,7 @@
 const database = require('./database')
 const{contextBridge} = require('electron')
 
+
 /****************************
  * CRUD VENTAS
  **************************/

@@ -4,7 +4,7 @@ let actualDate = `${todayDate[2]}-${todayDate[1]}-${todayDate[0]}`
 let ventasList = window.api.getVentas(actualDate, actualDate)
 let idVentas = 0;
 let idProducto = 0;
-console.log(ventasList)
+//console.log(ventasList)
 let ventasRoot = document.getElementById('ventasRoot')
 
 init()
@@ -12,8 +12,9 @@ init()
 function init(){
     ventasRoot.innerHTML = ''
     ventasList.map((venta) => {
+     
 
-        ventasRoot.innerHTML += '<div class="d-flex align-items-center justify-content-center mb-3"> <div class="col-10 bg-body-tertiary rounded p-2"> <div class="row"> <div class="col-8"> <h5>'+venta.Name+'</h5> </div> <div class="col-3  d-flex align-items-center justify-content-center"> <h6>Cantidad: '+venta.Quantity+'</h6> </div> </div> <div class="row"> <div class="col-8"> <h6>'+ventaDateOrder(venta.Date)+'</h6> </div> <div class="col-3 d-flex align-items-center justify-content-center"> <h6>Valor: '+venta.Quantity * venta.Price_Sell+'</h6> </div> <div class="col"> <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="../img/deleteIcon.svg" alt="'+venta.ID+'" name="'+venta.idProducto+','+venta.Quantity+'" key="'+venta.Name+'" width="32px" height="32px"></a> </div> </div> </div> </div> '
+        ventasRoot.innerHTML += '<div class="d-flex align-items-center justify-content-center mb-3"> <div class="col-10 bg-body-tertiary rounded p-2"> <div class="row"> <div class="col-8"> <h5>'+venta.Name+'</h5> </div> <div class="col-3  d-flex align-items-center justify-content-center"> <h6>Cantidad: '+venta.Quantity+'</h6> </div> </div> <div class="row"> <div class="col-8"> <h6>'+ventaDateOrder(venta.Date)+'</h6> </div> <div class="col-3 d-flex align-items-center justify-content-center"> <h6>Valor: '+venta.Price+'</h6> </div> <div class="col"> <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="../img/deleteIcon.svg" alt="'+venta.ID+'" name="'+venta.idProducto+','+venta.Quantity+'" key="'+venta.Name+'" width="32px" height="32px"></a> </div> </div> </div> </div> '
     })
 
 }
