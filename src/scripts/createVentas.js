@@ -1,5 +1,6 @@
 //Variables globales
 const listProducts = window.api.getProductos()
+const listVentas = window.api.getVentas()
 let productosRoot = document.getElementById('productosRoot')
 let productosDropdown = document.getElementById('productosDropdown')
 let nameProducto = document.getElementById('nombre_input')
@@ -12,10 +13,20 @@ let productoPosition = 0
 let actualProductoPosition = 0
 let productoActual;
 let findProduct = false
+let idVenta = 1
 const productosCart = []
 let totalVenta = 0
 cantidadVenta.value = 1
-console.log(listProducts)
+//console.log(listProducts)
+
+const lastProduct = window.api.getLastVentas()
+if(lastProduct != ""){
+  idVenta = parseInt(lastProduct[0].ID_Factura)+1
+  console.log(idVenta)
+}
+
+
+
 
 //Detectar los clicks en la pantalla
 document.addEventListener('click', (e) => {
@@ -90,11 +101,13 @@ function buscarProducto(){
   //Se lee los productos para encontrar el producto por el nombre o codigo de barras
   listProducts.map((producto) => {
       indice++
-      if(producto.BarCode.toString() === nameProducto.value || producto.Name.toString() === nameProducto.value) {
+      
+      producto.BarCode? producto.BarCode= producto.BarCode  : producto.BarCode = 9999996455346343
+      if(producto.BarCode.toString().toLowerCase() === nameProducto.value || producto.Name.toString().toLowerCase() === nameProducto.value.toLowerCase()) {
         findProduct = true
         actualProductoPosition = indice
       }
-      
+    
   })
   //Si el producto se encuentra entonces desplegar en pantalla su precio y su nombre
   if(findProduct){
@@ -113,6 +126,11 @@ function buscarProducto(){
  * Caso contrario se resetea el formulario y se vuelve a comenzar
  ******************************************************************/
 function agregarProducto(){
+
+  if(!checkVenta() || !findProduct){
+    document.querySelector("#alertValid").style.display = "block";
+    return
+  }
   //Desplegar la seccion para visualizar el resumen de la venta
   boxTotalVenta.style.display= 'block';
   
@@ -129,10 +147,12 @@ function agregarProducto(){
     producto.Cantidad = parseInt(cantidadVenta.value)
     producto.Total = precioVenta.value *  parseInt(cantidadVenta.value)
     producto.Total_Ganancias = (precioVenta.value - producto.Price) * producto.Cantidad
+    producto.ID_Factura = idVenta
     //Guardar todos los datos en una variable nueva para que no se actualizen los datos de los objetos antiguos
     var newProducto = {Available: producto.Available,BarCode:producto.BarCode,ID:producto.ID,Price:producto.Price,
                       Name: producto.Name, Price_Sell: precioVenta.value, 
-                      Total: producto.Total, Cantidad: producto.Cantidad, Total_Ganancias: producto.Total_Ganancias}
+                      Total: producto.Total, Cantidad: producto.Cantidad, Total_Ganancias: producto.Total_Ganancias,
+                    ID_Factura: producto.ID_Factura}
 
   
     //Se guarda todo la informacion del producto en una lista de productos

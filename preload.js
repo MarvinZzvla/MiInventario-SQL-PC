@@ -9,6 +9,13 @@ const getVentas = (dateStart,dateEnd) =>{
     return database.getVentas(dateStart,dateEnd)
 }
 
+const getVentasByReceipt = (factura) =>{
+    return database.getVentasByReceipt(factura)
+}
+
+const getLastVentas = (factura) =>{
+    return database.getLastVentas()
+}
 const createVentas = (producto) =>{
     return database.createVentas(producto)
 }
@@ -93,6 +100,8 @@ const updateSubscription = (dateCompra,dateExpired) =>{
 contextBridge.exposeInMainWorld("api",{
     //CRUD VENTAS
     getVentas: getVentas,
+    getVentasByReceipt: getVentasByReceipt,
+    getLastVentas:getLastVentas,
     createVentas: createVentas,
     deleteVentas: deleteVentas,
     //CRUD PRODUCTOS

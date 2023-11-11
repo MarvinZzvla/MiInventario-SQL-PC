@@ -27,6 +27,15 @@ return fetch(url).then(response => {
 }
 
 function checkToken(){
+
+    //Check the token without internet connection if is testing
+    if(isPrueba){
+        if(encrypter(token_input.value,3).toLowerCase() == "suxhed"){
+            renoveSubPrueba()
+            alert("Tienes una prueba gratis! de 24 horas")
+        }
+    }
+    //GET Token from internet
     getToken().then(response => {
         let token_encrypter = encrypter(token_input.value,3)
         //Si no se encuentra el token
@@ -50,12 +59,13 @@ function checkToken(){
             document.querySelector('#alertValid').style.display = "block"
         }
     })
+    
 }
 
 function renoveSub(){
     let dateCompra = new Date().toISOString().split('T')[0]
     let dateExpired = new Date(dateCompra)
-    // Añade 5 días a la fecha
+    // Añade 30 días a la fecha
     dateExpired.setDate(dateExpired.getDate() + 30);
     dateExpired = dateExpired.toISOString().split('T')[0]
 
@@ -71,7 +81,7 @@ function renoveSub(){
 function renoveSubPrueba(){
     let dateCompra = new Date().toISOString().split('T')[0]
     let dateExpired = new Date(dateCompra)
-    // Añade 5 días a la fecha
+    // Añade 1 días a la fecha
     dateExpired.setDate(dateExpired.getDate() + 1);
     dateExpired = dateExpired.toISOString().split('T')[0]
 

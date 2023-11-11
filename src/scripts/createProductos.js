@@ -77,7 +77,7 @@ function addProducto() {
         return
     }
     const newProducto = [{
-        Name: name.value, Price: parseInt(costo.value), BarCode: parseInt(barcode.value)
+        Name: name.value, Price: parseInt(costo.value), BarCode: parseInt(barcode.value)?9999999:parseInt(barcode.value)
         , Price_Sell: parseInt(price.value), Cantidad: parseInt(cantidad.value)
     }]
     //Call the database and wait for the answer 

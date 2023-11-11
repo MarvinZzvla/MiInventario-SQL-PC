@@ -2,11 +2,9 @@
 let finanzasList = window.api.getFinanzas();
 let finanzasRoot = document.getElementById('finanzasRoot');
 
-
-
 document.addEventListener('click', (e) => {
     if (e.target.id === 'submitBtn') {
-        
+
         searchByRange()
     }
 })
@@ -18,6 +16,10 @@ init()
 function init() {
     verifyNull()
     let todayDate = new Date().toLocaleDateString().split('/')
+
+    // let date = new Date().toLocaleDateString()
+    // date = date.split('/').reverse().join('-')
+
     todayDate = `${todayDate[0] < 10 ? todayDate[0] = '0' + todayDate[0] : todayDate[0]}/${todayDate[1] < 10 ? todayDate[1] = '0' + todayDate[1] : todayDate[1]}/${todayDate[2]}`
     let dateSplit = todayDate.split('/')
     let monthDate = returnMonth(dateSplit)
@@ -25,7 +27,7 @@ function init() {
 
 }
 
-function verifyNull(){
+function verifyNull() {
     //Today
     finanzasList.finanzasDay[0].Total === null ? finanzasList.finanzasDay[0].Total = 0 : finanzasList.finanzasDay[0].Total
     finanzasList.finanzasDay[0].Total_Ganancias === null ? finanzasList.finanzasDay[0].Total_Ganancias = 0 : finanzasList.finanzasDay[0].Total_Ganancias
@@ -49,7 +51,7 @@ function searchByRange() {
     else (alert('Seleccione una fecha correctamente'))
 }
 
-function showFinanzasByRange(dateFromPicker){
+function showFinanzasByRange(dateFromPicker) {
     let dateStart = document.getElementById('dateStart').value
     let dateEnd = document.getElementById('dateEnd').value
 
@@ -58,15 +60,15 @@ function showFinanzasByRange(dateFromPicker){
 
     dateStart = `${dateStartSplit[0]}/${dateStartSplit[1]}/${dateStartSplit[2]}`
     dateEnd = `${dateEndSplit[0]}/${dateEndSplit[1]}/${dateEndSplit[2]}`
-    
+
     let finanzasListByRange = window.api.getFinanzasByRange(dateStart, dateEnd)
 
-    if( finanzasListByRange[0].Total == null){
+    if (finanzasListByRange[0].Total == null) {
         finanzasListByRange[0].Total = 0
         finanzasListByRange[0].Total_Ganancias = 0
     }
-   
-    finanzasRoot.innerHTML = '<div class="bg-body-tertiary rounded shadow p-3 m-2"> <div class="bg-body-finanzas"> <div class="row"> <div class="col"> <h6>' + dateFromPicker + '</h6> </div> </div> <div class="row"> <p>Ventas: $'+finanzasListByRange[0].Total+'</p> </div> <div class="row"> <p>Ganancias: $'+finanzasListByRange[0].Total_Ganancias+'</p> </div> </div> </div>'
+
+    finanzasRoot.innerHTML = '<div class="bg-body-tertiary rounded shadow p-3 m-2"> <div class="bg-body-finanzas"> <div class="row"> <div class="col"> <h6>' + dateFromPicker + '</h6> </div> </div> <div class="row"> <p>Ventas: $' + finanzasListByRange[0].Total + '</p> </div> <div class="row"> <p>Ganancias: $' + finanzasListByRange[0].Total_Ganancias + '</p> </div> </div> </div>'
 
 }
 
@@ -74,7 +76,7 @@ function showFinanzasByRange(dateFromPicker){
 function returnDateFromPicker() {
     let pickerStart = document.getElementById('dateStart').value
     let pickerEnd = document.getElementById('dateEnd').value
-    
+
 
     if (pickerStart === '' && pickerEnd === '') { return }
 
@@ -84,8 +86,8 @@ function returnDateFromPicker() {
     let selectStartPicker = pickerStart != ''
     let selectEndPicker = pickerEnd != ''
 
-    if(selectStartPicker && selectEndPicker ){
-        if(pickerStart > pickerEnd){return}
+    if (selectStartPicker && selectEndPicker) {
+        if (pickerStart > pickerEnd) { return }
     }
 
     let fullDate = ''
@@ -100,7 +102,7 @@ function returnDateFromPicker() {
         fullDate = `${pickerStart[2]}/${pickerStart[1]}/${pickerStart[0]} al ${pickerEnd[2]}/${pickerEnd[1]}/${pickerEnd[0]}`
     }
 
-    
+
 
     return fullDate
 }

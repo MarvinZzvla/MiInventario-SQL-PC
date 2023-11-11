@@ -16,46 +16,58 @@
         </div>
     </div>
 
-    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow" style="width: 96%;">
+    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow"
+        style="width: 96%;">
         <div class="col-1" style="z-index: 3;">
             <img src="../img/venta.png" alt="ventas" width="64px" height="64px">
         </div>
         <div class="col p-4 text-center">
-                <a href="./ventasHome.html"><h4 id="ventasBox">Ventas</h4></a>
+            <a href="./ventasHome.html">
+                <h4 id="ventasBox">Ventas</h4>
+            </a>
         </div>
         <div class="col-1"></div>
 
     </div>
 
-    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow" style="width: 96%;">
+    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow"
+        style="width: 96%;">
         <div class="col-1" style="z-index: 3;">
             <img src="../img/producto.png" alt="ventas" width="64px" height="64px">
         </div>
         <div class="col p-4 text-center">
-                <a href="./productosHome.html"><h4 id="productosBox">Productos</h4></a>
+            <a href="./productosHome.html">
+                <h4 id="productosBox">Productos</h4>
+            </a>
         </div>
         <div class="col-1"></div>
 
     </div>
 
 
-    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow" style="width: 96%;">
+    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow"
+        style="width: 96%;">
         <div class="col-1" style="z-index: 3;">
             <img src="../img/finanzas.png" alt="ventas" width="64px" height="64px">
         </div>
         <div class="col p-4 text-center">
-                <a href="./finanzasHome.html"><h4 id="finanzasBox">Finanzas</h4></a>
+            <a href="./finanzasHome.html">
+                <h4 id="finanzasBox">Finanzas</h4>
+            </a>
         </div>
         <div class="col-1"></div>
 
     </div>
 
-    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow" style="width: 96%;">
+    <div class="row m-3 mt-4 d-flex align-items-center justify-content-center bg-body-tertiary rounded shadow"
+        style="width: 96%;">
         <div class="col-1" style="z-index: 3;">
             <img src="../img/users.png" alt="ventas" width="64px" height="64px">
         </div>
         <div class="col p-4 text-center">
-                <a href="./usuariosHome.html"><h4 id="usuariosBox">Usuarios</h4></a>
+            <a href="./usuariosHome.html">
+                <h4 id="usuariosBox">Usuarios</h4>
+            </a>
         </div>
         <div class="col-1"></div>
 
@@ -63,6 +75,12 @@
 
     <div class="row m-3 d-flex align-items-center justify-content-center">
         <button onclick="logout()" class="col-8 btn btn-danger">Cerrar sesion</button>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <p id="sub_active"style="color: white; font-size: 10px;">Suscripción activa hasta 08/11/2023</p>
+        </div> 
     </div>
 
 </body>
@@ -77,7 +95,7 @@
 <script src="../scripts/intro/homePageIntro.js"></script>
 <script>
     function logout() {
-        localStorage.setItem('isLogged',false)
+        localStorage.setItem('isLogged', false)
         window.location.replace('./index.html');
     }
 
