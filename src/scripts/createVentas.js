@@ -20,8 +20,8 @@ cantidadVenta.value = 1
 //console.log(listProducts)
 
 const lastProduct = window.api.getLastVentas()
-if(lastProduct != ""){
-  idVenta = parseInt(lastProduct[0].ID_Factura)+1
+if (lastProduct != "") {
+  idVenta = parseInt(lastProduct[0].ID_Factura) + 1
   console.log(idVenta)
 }
 
@@ -31,13 +31,13 @@ if(lastProduct != ""){
 //Detectar los clicks en la pantalla
 document.addEventListener('click', (e) => {
   //Si el click se hace el boton de borrar producto llamar funcion borrar
-if(e.target.id == 'btnDeleteProducto'){
-  deleteVentasCart(e.target)
-}
-//Si el click se hace en el boton de pagar llamar la funcion crear venta
-if(e.target.id == 'pagarBtn'){
-  crearVentas()
-}
+  if (e.target.id == 'btnDeleteProducto') {
+    deleteVentasCart(e.target)
+  }
+  //Si el click se hace en el boton de pagar llamar la funcion crear venta
+  if (e.target.id == 'pagarBtn') {
+    crearVentas()
+  }
 })
 
 //Detectar cambios en el input 
@@ -45,7 +45,7 @@ nameProducto.addEventListener('input', buscarProducto)
 
 //Obtener lista de  productos y desplegar en un dropdown
 listProducts.map((producto) => {
-    productosDropdown.innerHTML += '<li><a class="dropdown-item" href="#">'+producto.Name+'</a></li>' 
+  productosDropdown.innerHTML += '<li><a class="dropdown-item" href="#">' + producto.Name + '</a></li>'
 })
 
 //Obtener el codigo de barra del producto y buscar en la lista de productos
@@ -74,14 +74,14 @@ dropdownMenu.addEventListener('click', function (event) {
     //la información del producto com su precio de venta
     let indice = 0
     listProducts.map((producto) => {
-        indice++
-        if(producto.Name === textoSeleccionado){
-            productoPosition = indice
-        }
+      indice++
+      if (producto.Name === textoSeleccionado) {
+        productoPosition = indice
+      }
     })
     //Si el producto coincide se llama la funcion buscar producto
     buscarProducto()
-    precioVenta.value = listProducts[productoPosition-1].Price_Sell
+    precioVenta.value = listProducts[productoPosition - 1].Price_Sell
   }
 });
 
@@ -91,31 +91,31 @@ dropdownMenu.addEventListener('click', function (event) {
  * en la base de datos, buscando por el nombre y el codigo de barra
  * si encuentra el producto muestra sus datos en pantalla
  *********************************************************************************/
-function buscarProducto(){
+function buscarProducto() {
   //Variables locales
   let indice = 0
   actualProductoPosition = 0
   findProduct = false
-  
+
 
   //Se lee los productos para encontrar el producto por el nombre o codigo de barras
   listProducts.map((producto) => {
-      indice++
-      
-      producto.BarCode? producto.BarCode= producto.BarCode  : producto.BarCode = 9999996455346343
-      if(producto.BarCode.toString().toLowerCase() === nameProducto.value || producto.Name.toString().toLowerCase() === nameProducto.value.toLowerCase()) {
-        findProduct = true
-        actualProductoPosition = indice
-      }
-    
+    indice++
+
+    producto.BarCode ? producto.BarCode = producto.BarCode : producto.BarCode = 9999996455346343
+    if (producto.BarCode.toString().toLowerCase() === nameProducto.value || producto.Name.toString().toLowerCase() === nameProducto.value.toLowerCase()) {
+      findProduct = true
+      actualProductoPosition = indice
+    }
+
   })
   //Si el producto se encuentra entonces desplegar en pantalla su precio y su nombre
-  if(findProduct){
-    precioVenta.value = listProducts[actualProductoPosition-1].Price_Sell
-    nameProducto.value = listProducts[actualProductoPosition-1].Name
+  if (findProduct) {
+    precioVenta.value = listProducts[actualProductoPosition - 1].Price_Sell
+    nameProducto.value = listProducts[actualProductoPosition - 1].Name
     infoCantidad.style.display = 'block'
-    infoCantidad.innerHTML = `Tienes ${listProducts[actualProductoPosition-1].Available} disponibles!`
-    }
+    infoCantidad.innerHTML = `Tienes ${listProducts[actualProductoPosition - 1].Available} disponibles!`
+  }
 
 }
 /****************************************************************
@@ -125,54 +125,56 @@ function buscarProducto(){
  * para ser mostrados en el resumen de la venta
  * Caso contrario se resetea el formulario y se vuelve a comenzar
  ******************************************************************/
-function agregarProducto(){
+function agregarProducto() {
 
-  if(!checkVenta() || !findProduct){
+  if (!checkVenta() || !findProduct) {
     document.querySelector("#alertValid").style.display = "block";
     return
   }
   //Desplegar la seccion para visualizar el resumen de la venta
-  boxTotalVenta.style.display= 'block';
-  
+  boxTotalVenta.style.display = 'block';
+
   //Obtener el control del formulario de la venta
   var formularioVenta = document.getElementById('formularioVenta')
   let producto = listProducts[actualProductoPosition - 1]
   //Si se encontro un producto añadirlo a la lista de objetos y reset el formulario
-  if(findProduct && checkVenta()){
+  if (findProduct && checkVenta()) {
     //productosCart[0].Total += producto.Price_Sell *  parseInt(cantidadVenta.value)
     //Sumar al total el precio del producto vendido por la cantidad vendida
-    totalVenta += precioVenta.value *  parseInt(cantidadVenta.value)
-    
+    totalVenta += precioVenta.value * parseInt(cantidadVenta.value)
+
     //Se agrega al informacion del producto la cantidad vendida y el total vendido
     producto.Cantidad = parseInt(cantidadVenta.value)
-    producto.Total = precioVenta.value *  parseInt(cantidadVenta.value)
+    producto.Total = precioVenta.value * parseInt(cantidadVenta.value)
     producto.Total_Ganancias = (precioVenta.value - producto.Price) * producto.Cantidad
     producto.ID_Factura = idVenta
     //Guardar todos los datos en una variable nueva para que no se actualizen los datos de los objetos antiguos
-    var newProducto = {Available: producto.Available,BarCode:producto.BarCode,ID:producto.ID,Price:producto.Price,
-                      Name: producto.Name, Price_Sell: precioVenta.value, 
-                      Total: producto.Total, Cantidad: producto.Cantidad, Total_Ganancias: producto.Total_Ganancias,
-                    ID_Factura: producto.ID_Factura}
+    var newProducto = {
+      Available: producto.Available, BarCode: producto.BarCode, ID: producto.ID, Price: producto.Price,
+      Name: producto.Name, Price_Sell: precioVenta.value,
+      Total: producto.Total, Cantidad: producto.Cantidad, Total_Ganancias: producto.Total_Ganancias,
+      ID_Factura: producto.ID_Factura
+    }
 
-  
+
     //Se guarda todo la informacion del producto en una lista de productos
     productosCart.push(newProducto)
     //Se muestra en pantalla los productos en el carrito
     showVentas()
     //Se resetea el formulario y se deja por defecto cantidad: 1
     formularioVenta.reset()
-    infoCantidad.innerHTML=''
-    cantidadVenta.value=1
-    }
-    //Caso contrario solo reset el formulario
-    else{
-      
-      formularioVenta.reset()
-      cantidadVenta.value=1
-    }
+    infoCantidad.innerHTML = ''
+    cantidadVenta.value = 1
+  }
+  //Caso contrario solo reset el formulario
+  else {
 
-    findProduct = false
-    // console.log(productosCart)
+    formularioVenta.reset()
+    cantidadVenta.value = 1
+  }
+
+  findProduct = false
+  // console.log(productosCart)
 }
 
 
@@ -180,8 +182,8 @@ function agregarProducto(){
  * Check venta 
  * Es una pequeña funcion para saber si el formulario es valido
  ******************************************/
-function checkVenta(){
-  if(nameProducto.value=="" || precioVenta.value=="" || precioVenta.value=="0"||cantidadVenta.value=="" || cantidadVenta.value=="0"){
+function checkVenta() {
+  if (nameProducto.value == "" || precioVenta.value == "" || precioVenta.value == "0" || cantidadVenta.value == "" || cantidadVenta.value == "0") {
     return false
   }
   return true
@@ -193,14 +195,14 @@ function checkVenta(){
  * lo que se encuentra en el carrito, se rehace todo para
  * actualizar el carrito
  ********************************************************/
-function showVentas(){
-//Actualizar el total de la venta 
-document.getElementById('total_venta').innerHTML = totalVenta + '$'
-let counter = 0;
-productosListaBox.innerHTML = ''
-//Por cada producto en el carrito de compra dibujar en el HTML un nuevo item con su nombre, precio y cantidad con su boton de eliminar
+function showVentas() {
+  //Actualizar el total de la venta 
+  document.getElementById('total_venta').innerHTML = totalVenta + '$'
+  let counter = 0;
+  productosListaBox.innerHTML = ''
+  //Por cada producto en el carrito de compra dibujar en el HTML un nuevo item con su nombre, precio y cantidad con su boton de eliminar
   productosCart.map((producto) => {
-    productosListaBox.innerHTML += '<div class="row mt-1 p-1" style="border: 1px solid #000;"> <div class="col-4 mt-2"><h6>'+producto.Name+'</h6></div> <div class="col-2 mt-2"><h6>'+producto.Price_Sell+'$</h6></div> <div class="col-4 mt-2"><h6>'+producto.Cantidad+'</h6></div> <div class="col-1"><button class="btn btn-danger" id="btnDeleteProducto" value="'+counter+'">Eliminar</button></div> </div>'
+    productosListaBox.innerHTML += '<div class="row mt-1 p-1" style="border: 1px solid #000;"> <div class="col-4 mt-2"><h6>' + producto.Name + '</h6></div> <div class="col-2 mt-2"><h6>' + producto.Price_Sell + '$</h6></div> <div class="col-4 mt-2"><h6>' + producto.Cantidad + '</h6></div> <div class="col-1"><button class="btn btn-danger" id="btnDeleteProducto" value="' + counter + '">Eliminar</button></div> </div>'
     counter++
   })
 }
@@ -211,43 +213,43 @@ productosListaBox.innerHTML = ''
  * Resta el precio del producto multiplicado por la cantidad 
  * Al total del resumen de la venta 
  ***********************************************************/
-function deleteVentasCart(elemento){
+function deleteVentasCart(elemento) {
   let precio = productosCart[elemento.value].Total
   totalVenta -= precio
-  
+
   //Boorar el producto seleccionado del carrito de compra
-  productosCart.splice(elemento.value,1)
+  productosCart.splice(elemento.value, 1)
 
   //Si no hay nada en el carrito de compras, se oculta resumen de ventas y no puedes comprar
-  if(productosCart.length < 1){
-    boxTotalVenta.style.display= 'none';
+  if (productosCart.length < 1) {
+    boxTotalVenta.style.display = 'none';
   }
 
   //Pintar en pantalla el nuevo resumen de la venta actualizado
-showVentas()
+  showVentas()
 
 }
 
-function crearVentas(){
- 
+function crearVentas() {
+
   productosCart.map((producto) => {
     const createProducto = window.api.createVentas(producto)
     updateProducto(producto)
-    updateFinanzas(createProducto,producto)
-    
+    updateFinanzas(createProducto, producto)
+
   })
 
   window.location.replace("ventasHome.html")
 
 }
 
-function updateFinanzas(id,producto) {
-  const updateFinanzas = window.api.createFinanzas(id,producto)
+function updateFinanzas(id, producto) {
+  const updateFinanzas = window.api.createFinanzas(id, producto)
 }
 
-function updateProducto(producto){
+function updateProducto(producto) {
   const updateProducto = window.api.updateProducto(producto)
- }
+}
 
 
 

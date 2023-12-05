@@ -1,6 +1,7 @@
 import {encrypter,decrypt} from './encrypt.js'
 const payInfo = window.api.checkSubscription()
 let isPrueba = false
+
 if(payInfo[0].Pay == 0){
     isPrueba = true
     document.querySelector('#test_text').style.display = 'block'

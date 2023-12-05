@@ -37,7 +37,11 @@ ipcRenderer.on('db-path', (event, data) => {
      ********************************************************************************************/
     exports.createVentas = (producto) => {
         let date = new Date().toLocaleDateString()
-        date = date.split('/').reverse().join('-')
+        date = date.split('/')
+        if(date[0].length < 2){date[0] = '0'+date[0]}
+        date = date.reverse().join('-')
+
+        console.log(date)
     
         let stringQuery = 'INSERT INTO Ventas (FK_Product,Date,Quantity,Price,ID_Factura) VALUES(?,?,?,?,?)'
         const query = db.prepare(stringQuery)
@@ -184,9 +188,14 @@ ipcRenderer.on('db-path', (event, data) => {
      *********************************************************************************************/
     exports.createFinanzas = (id, producto) => {
         var mydate = new Date().toLocaleDateString();
-        mydate = mydate.split("/").reverse().join("/")
+        mydate = mydate.split("/")
+        if(mydate[0].length < 2){mydate[0] = '0'+mydate[0]}
+        mydate = mydate.reverse().join("/")
+        console.log(mydate)
+
         let stringQuery = 'INSERT INTO Finanzas (Date,Total,Total_Ganancias,FK_VENTA) VALUES(?,?,?,?)'
         let query = db.prepare(stringQuery)
+        
         const result = query.run(mydate, producto.Total, producto.Total_Ganancias, id)
 
         // const query = db.prepare(stringQuery)

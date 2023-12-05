@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <title>Factura</title>
+</head>
+
+<body>
+    <div id="factura_box">
+        <div id="header-factura">
+            <div class="bg-body-tertiary m-3 p-4 text-center shadow rounded">
+                <h2 id="factura_number">Factura #1</h2>
+            </div>
+        </div>
+
+        <div id="factura" class="bg-body-tertiary shadow rounded p-3" style="margin-left: 200px;margin-right: 200px;">
+            <h2 id="bussiness_name" style="text-align: center;">Venta</h2>
+            <div id="content_factura" style="margin-bottom: 5px;">
+                <p id="date_factura">Fecha: 05-12-2023</p>
+                <p id="number_factura">Factura #1</p>
+                <div style="margin-top:10px;padding-top:5px;border-top: 2px solid #000;">
+                    <h5>Productos</h5>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Nombre</h6>
+                        </div>
+                        <div class="col">
+                            <h6>Cantidad</h6>
+                        </div>
+                        <div class="col">
+                            <h6>Valor</h6>
+                        </div>
+                    </div>
+
+                    <div id="items_factura">
+
+                        <!-- <div class="row">
+                            <div class="col">
+                                <p>Camiseta</p>
+                            </div>
+                            <div class="col">
+                                <p>2</p>
+                            </div>
+                            <div class="col">
+                                <p>140</p>
+                            </div>
+                        </div> -->
+
+                    </div>
+
+                    <div id="total_factura">
+                        <div class="row" style="margin-top:10px;padding-top:5px;border-top: 2px solid #000;">
+                            <div class="col">
+                                <h6>Total</h6>
+                            </div>
+                            <div class="col">
+
+                            </div>
+                            <div class="col">
+                                <h6 id="total_price">200</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row text-center" style="margin-top:10px;padding-top:20px;border-top: 2px solid #000;">
+                        <h6>Muchas gracias por su compra!</h6>
+                        <h6>Porfavor vuelva pronto!</h6>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <button class="btn btn-primary" onclick="window.location.replace('./ventasHome.html')">Back</button>
+        <button id="btnPrint" class="btn btn-danger">Imprimir</button>
+    </div>
+</body>
+<link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+<script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../scripts/receiptVenta.js"></script>
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+    /* Aplicar estilos al párrafo dentro del div */
+    div p {
+        margin-bottom: 5px;
+        /* Puedes ajustar el valor según tus necesidades */
+    }
+</style>
+
+</html>
