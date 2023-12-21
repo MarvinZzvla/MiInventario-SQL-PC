@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (product != null || product != undefined) {
         //isEdit it's a variable to check if the product is being editable
         isEdit = true
+        
         //find the product of the listProducts and fill the fields with its properties
         productoSeleted = listProducts.find((producto) => producto.ID == product)
         idProducto = productoSeleted.ID
@@ -46,6 +47,7 @@ function showInfoProducto(producto) {
     barcode.value = producto.BarCode
     price.value = producto.Price_Sell
     cantidad.value = producto.Available
+    if(isEdit){barcode.value =""}
 }
 
 /*****************************************************
@@ -56,7 +58,7 @@ function showInfoProducto(producto) {
 function editProducto() {
 
     //Create a object with the product that has been edited
-    const editProducto = [{ ID: idProducto, Name: name.value, Price: costo.value, BarCode: barcode.value, Price_Sell: price.value, Cantidad: cantidad.value }]
+    const editProducto = [{ ID: idProducto, Name: name.value, Price: costo.value, BarCode: barcode.value == ""?9999999:parseInt(barcode.value), Price_Sell: price.value, Cantidad: cantidad.value }]
     //console.log(editProducto)
     //GET if the information was saved correctly in the database
     const updateAllProducto = window.api.updateAllProducto(editProducto)
@@ -76,10 +78,13 @@ function addProducto() {
         console.log("No se puede guardar un producto vacio")
         return
     }
+    
     const newProducto = [{
-        Name: name.value, Price: parseInt(costo.value), BarCode: parseInt(barcode.value)?9999999:parseInt(barcode.value)
+        Name: name.value, Price: parseInt(costo.value), BarCode: barcode.value == ""?9999999:parseInt(barcode.value)
         , Price_Sell: parseInt(price.value), Cantidad: parseInt(cantidad.value)
     }]
+
+    console.log(newProducto)
     //Call the database and wait for the answer 
     const createProducto = window.api.createProducto(newProducto)
     //console.log(createProducto)
