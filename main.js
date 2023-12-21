@@ -24,7 +24,7 @@ function createWindow() {
     autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
-      devTools: true,
+      devTools: false,
       preload: path.join(__dirname, "preload.js"),
     },
   });

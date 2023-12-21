@@ -180,7 +180,8 @@ const tour = new Shepherd.Tour({
 /*****************************************************
  * INICIAR
  ********************************************************/
-  if(localStorage.getItem('firstTime') == 'true')
+
+  if(localStorage.getItem('firstTime') == undefined)
   {
     tour.start()
   }

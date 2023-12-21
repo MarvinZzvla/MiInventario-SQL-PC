@@ -14,7 +14,6 @@ checkSearchingOption()
 
 function init() {
     ventasRoot.innerHTML = ''
-    //onclick="window.location.replace(\'./receiptVenta.html\')
     ventasList.map((venta) => {
         console.log(venta)
         ventasRoot.innerHTML += '<div class="d-flex align-items-center justify-content-center mb-3"> <div id="boxventa" class="col-10 bg-body-tertiary rounded p-2" value="2"><div style="cursor:pointer;" onclick="window.location.replace(\'./receiptVenta.html?venta='+venta.ID_Factura+'\') "> <div class="row"> <div class="col-8"> <h5>' + venta.Name + '</h5> </div> <div class="col-3  d-flex align-items-center justify-content-center"> <h6>Cantidad: ' + venta.Quantity + '</h6> </div><div class="col"> <p style="font-size:10px;font-weight:bold;">#' + venta.ID_Factura + '</p> </div> </div> </div><div class="row"> <div class="col-8" style="cursor:pointer;" onclick="window.location.replace(\'./receiptVenta.html?venta='+venta.ID_Factura+'\') "> <h6>' + ventaDateOrder(venta.Date) + '</h6> </div> <div class="col-3 d-flex align-items-center justify-content-center"> <h6>Valor: ' + venta.Price + '</h6> </div> <div class="col"> <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="../img/deleteIcon.svg" alt="' + venta.ID + '" name="' + venta.idProducto + ',' + venta.Quantity + '" key="' + venta.Name + '" width="32px" height="32px"></a> </div> </div> </div> </div> '

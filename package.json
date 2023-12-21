@@ -1,6 +1,6 @@
 {
   "name": "mi-inventario-electron",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Mi Inventario una app de gestion de inventario",
   "main": "main.js",
   "scripts": {
