@@ -1,4 +1,0 @@
-1- Quitar los espacios de los archivos correspondientes y colocar un "-" en lugar del espacio
-2-Tomar todos los archivos excepto los folders o carpetas y este archivo de texto
-3-La version en github tiene que contener un tag con el mismo nombre de la version
-4-La version no debe contener ninguna letra, ej: version a subir: 1.0.4 version en github 1.0.4 y su tag 1.0.4
