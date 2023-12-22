@@ -14,6 +14,7 @@ let actualProductoPosition = 0
 let productoActual;
 let findProduct = false
 let idVenta = 1
+let cantidad_disponible = 0
 const productosCart = []
 let totalVenta = 0
 cantidadVenta.value = 1
@@ -114,6 +115,7 @@ function buscarProducto() {
     precioVenta.value = listProducts[actualProductoPosition - 1].Price_Sell
     nameProducto.value = listProducts[actualProductoPosition - 1].Name
     infoCantidad.style.display = 'block'
+    cantidad_disponible = listProducts[actualProductoPosition - 1].Available
     infoCantidad.innerHTML = `Tienes ${listProducts[actualProductoPosition - 1].Available} disponibles!`
   }
 
@@ -126,9 +128,16 @@ function buscarProducto() {
  * Caso contrario se resetea el formulario y se vuelve a comenzar
  ******************************************************************/
 function agregarProducto() {
-
+  //Verificar que todos los campos sean validos y llenados correctamente
   if (!checkVenta() || !findProduct) {
     document.querySelector("#alertValid").style.display = "block";
+    return
+  }
+  //Checkear si hay la cantidad disponible para vender
+  if(cantidadVenta.value <= 1){
+    cantidadVenta.value = 1
+  }
+  if (cantidad_disponible < cantidadVenta.value) {
     return
   }
   //Desplegar la seccion para visualizar el resumen de la venta
@@ -137,6 +146,7 @@ function agregarProducto() {
   //Obtener el control del formulario de la venta
   var formularioVenta = document.getElementById('formularioVenta')
   let producto = listProducts[actualProductoPosition - 1]
+
   //Si se encontro un producto añadirlo a la lista de objetos y reset el formulario
   if (findProduct && checkVenta()) {
     //productosCart[0].Total += producto.Price_Sell *  parseInt(cantidadVenta.value)
